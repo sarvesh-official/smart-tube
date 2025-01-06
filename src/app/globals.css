@@ -2,20 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.background-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("/images/background.png");
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.custom-scrollbar {
+    /* Hide default scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #BA6EF2 transparent;
 }
