@@ -1,77 +1,20 @@
 "use client";
 
-import { PlaylistItem } from "@/types/playlist";
+import { useYoutube } from "@/contexts/YoutubeContext";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CgPlayList } from "react-icons/cg";
 
 const SideBar = ({ isOpen }: { isOpen: boolean }) => {
-  const [playlists, setPlaylists] = useState<PlaylistItem[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  
   const { data: session } = useSession();
 
+  const {playlists, fetchPlaylistVideos} = useYoutube(); 
   useEffect(() => {
-    async function fetchPlaylists() {
-      if (session?.accessToken) {
-        setLoading(true);
-        try {
-          const response = await fetch("/api/youtube/playlists", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ session })
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to fetch playlists");
-          }
-
-          const data = await response.json();
-          console.log("Fetched playlists:", data);
-          setPlaylists(data.items || []);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "An error occurred");
-          console.error("Error fetching playlists:", err);
-        } finally {
-          setLoading(false);
-        }
-      }
-    }
-
-    fetchPlaylists();
+    fetchPlaylistVideos(session);
   }, [session]);
-  async function fetchPlaylistVideos(playlistId : string) {
-    if (session?.accessToken) {
-      setLoading(true);
-      try {
-        const response = await fetch("/api/youtube/playlistVideos", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ session, playlistId })
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to fetch playlists");
-        }
-
-        const data = await response.json();
-        console.log("Fetched playlist videos:", data); // Debug log
-        setPlaylists(data.items || []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-        console.error("Error fetching playlists:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }
+  
 
   return (
     <>
@@ -85,7 +28,7 @@ const SideBar = ({ isOpen }: { isOpen: boolean }) => {
                   className="flex flex-col items-center justify-center cursor-pointer"
                   key={playlist.id}
                   onClick={()=>{
-                    fetchPlaylistVideos(playlist.id)
+                    fetchPlaylistVideos(session,playlist.id)
                   }}
                   >
                   
@@ -107,7 +50,6 @@ const SideBar = ({ isOpen }: { isOpen: boolean }) => {
               ))}
               </div>
             </div>
-          {/* </div> */}
         </>
       ) : (
         <>

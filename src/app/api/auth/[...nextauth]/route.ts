@@ -53,7 +53,6 @@ const authOptions  = {
         
         // Only call createUser when we have a user and it's a new session
         if (session.user?.email) {
-          console.log('Attempting to create user:', session.user.email);
           try {
             const response = await fetch(`${process.env.BACKEND_URL}/api/user/createUser`, {
               method: "POST",

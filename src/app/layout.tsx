@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
 import localFont from 'next/font/local';
+import { YoutubeProvider } from "@/contexts/YoutubeContext";
 
 const robotSans = Roboto({
   variable: "--font-roboto-sans",
@@ -39,9 +40,11 @@ export default function RootLayout({
       <body
         className={`${robotSans.variable} ${youtube.variable} antialiased background-image h-4/5 w-4/5 bg-green-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-800 border-2`}
       >
-        <Provider>
-          {children}
-        </Provider>
+        <YoutubeProvider>
+          <Provider>
+            {children}
+          </Provider>
+        </YoutubeProvider>
       </body>
     </html>
   );

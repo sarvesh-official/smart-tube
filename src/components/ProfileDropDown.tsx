@@ -9,7 +9,6 @@ const ProfileDropDown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  console.log(session);
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,6 +47,8 @@ const ProfileDropDown = () => {
     </div>
     )
   }
+
+  // console.log(session);
   return (
     <div className="relative" ref={dropdownRef}>
       <button
