@@ -31,7 +31,7 @@ const SideBar = ({ isOpen }: { isOpen: boolean }) => {
           }
 
           const data = await response.json();
-          console.log("Fetched playlists:", data); // Debug log
+          console.log("Fetched playlists:", data);
           setPlaylists(data.items || []);
         } catch (err) {
           setError(err instanceof Error ? err.message : "An error occurred");
@@ -44,8 +44,35 @@ const SideBar = ({ isOpen }: { isOpen: boolean }) => {
 
     fetchPlaylists();
   }, [session]);
+  async function fetchPlaylistVideos(playlistId : string) {
+    if (session?.accessToken) {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/youtube/playlistVideos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ session, playlistId })
+        });
 
-  console.log(playlists);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to fetch playlists");
+        }
+
+        const data = await response.json();
+        console.log("Fetched playlist videos:", data); // Debug log
+        setPlaylists(data.items || []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching playlists:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
+
   return (
     <>
       {isOpen === true ? (
@@ -57,6 +84,9 @@ const SideBar = ({ isOpen }: { isOpen: boolean }) => {
                   <div
                   className="flex flex-col items-center justify-center cursor-pointer"
                   key={playlist.id}
+                  onClick={()=>{
+                    fetchPlaylistVideos(playlist.id)
+                  }}
                   >
                   
                     <Image

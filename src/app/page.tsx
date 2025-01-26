@@ -7,7 +7,6 @@ import { useState } from "react";
 const HomeScreen = () => {
   const [isOpen,setIsOpen] =useState(false);
 
-  console.log(isOpen)
   return (
     <div className="flex flex-col h-full w-full">
       <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
