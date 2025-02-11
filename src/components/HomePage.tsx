@@ -44,8 +44,8 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
         allVideos.map((video) => (
           // <VideoCard key={video.id} video={video} />
           <div key={video.videoId} className="p-3 cursor-pointer" onClick={ () =>{
-            console.log(video)
-            router.push(`/watch/${video.resourceId.videoId}`)
+          
+            router.push(`/watch/${video.videoId}`)
           }}>
             <Image
               className="rounded-lg"
