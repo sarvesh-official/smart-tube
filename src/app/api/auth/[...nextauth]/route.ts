@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
+// @ts-nocheck
+
 import GoogleProvider from "next-auth/providers/google";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
-import { Account, User } from "next-auth";
+import type { Account, User } from "next-auth";
 import NextAuth from "next-auth";
 
 

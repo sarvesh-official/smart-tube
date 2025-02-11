@@ -34,7 +34,6 @@ const VideosPage = ({ isOpen, playlistId }: { isOpen: boolean, playlistId : stri
     );
   }
   
-  console.log(playlistVideos);
   return (
     <div
       className={`pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${

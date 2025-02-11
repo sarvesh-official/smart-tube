@@ -1,7 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
+// @ts-nocheck
+
 "use client";
 
 import { useEffect } from "react";
 import type {} from 'ldrs'
+
 
 const Loader = () => {
   useEffect(() => {

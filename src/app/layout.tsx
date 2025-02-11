@@ -11,7 +11,7 @@ const robotSans = Roboto({
   weight: "400"
 });
 
-export const youtube = localFont({
+const youtube = localFont({
     src: [
       {
         path: '../../public/fonts/youtube.ttf',
