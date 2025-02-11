@@ -7,22 +7,22 @@ const VideoSkeleton = ({ isOpen }: { isOpen: boolean }) => {
       >
         <div className="text-white w-full">
           {/* Video Skeleton */}
-          <div className="rounded-xl bg-gray-800 animate-pulse w-3/5">
+          <div className="rounded-xl bg-violet-400 animate-pulse w-3/5">
             <div
-              className={`rounded-xl bg-gray-700 animate-pulse ${
+              className={`rounded-xl bg-violet-400 animate-pulse ${
                 isOpen ? "w-[560px] h-[350px]" : "w-[683px] h-[400px]"
               }`}
             ></div>
           </div>
   
           {/* Title Skeleton */}
-          <div className="h-6 w-3/5 bg-gray-700 animate-pulse mt-4 rounded"></div>
+          <div className="h-6 w-3/5 bg-violet-400 animate-pulse mt-4 rounded"></div>
   
           {/* Description Skeleton */}
           <div className="mt-2">
-            <div className="h-4 w-4/5 bg-gray-700 animate-pulse rounded mb-2"></div>
-            <div className="h-4 w-3/5 bg-gray-700 animate-pulse rounded mb-2"></div>
-            <div className="h-4 w-2/5 bg-gray-700 animate-pulse rounded"></div>
+            <div className="h-4 w-4/5 bg-violet-400 animate-pulse rounded mb-2"></div>
+            <div className="h-4 w-3/5 bg-violet-400 animate-pulse rounded mb-2"></div>
+            <div className="h-4 w-2/5 bg-violet-400 animate-pulse rounded"></div>
           </div>
         </div>
       </div>
