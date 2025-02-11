@@ -30,7 +30,7 @@ const Notification = () => {
       </button>
       <div className="relative" ref={dropdownRef}>
         {isOpen == true && (
-          <div className="absolute text-white text-center right-0 z-10 mt-[45px] w-44 border-border-1 rounded-lg shadow-lg bg-violet-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
+          <div className="absolute text-white text-center right-0 z-10 mt-[45px] w-44 rounded-lg shadow-lg bg-violet-300 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20">
            <h1 className="text-md py-2">Notifications</h1>
            <hr />
             <div className="px-4 py-2 mt-2 text-sm">
