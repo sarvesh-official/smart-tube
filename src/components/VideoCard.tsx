@@ -7,6 +7,9 @@ interface VideoCardProps {
       thumbnails: {
         high: {
           url: string;
+        },
+        maxres: {
+          url: string;
         };
       };
       description: string;
@@ -15,11 +18,12 @@ interface VideoCardProps {
 }
 
 const VideoCard = ({ video }: VideoCardProps) => {
+  
   return (
     <div className="flex flex-col w-80 bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-200 m-4">
       <div className="relative h-44 w-full">
         <Image
-          src={video.snippet.thumbnails.high.url}
+          src={"https://i.ytimg.com/vi/4pbtLGl9790/maxresdefault.jpg" }
           alt={video.snippet.title}
           fill
           className="object-cover"

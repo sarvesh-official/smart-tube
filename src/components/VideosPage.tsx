@@ -7,19 +7,19 @@ import Skeleton from "./Skeleton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const HomePage = ({ isOpen }: { isOpen: boolean }) => {
+const VideosPage = ({ isOpen, playlistId }: { isOpen: boolean, playlistId : string }) => {
   const { data: session } = useSession();
-  const { allVideos, fetchAllVideos, loading } = useYoutube();
+  const { playlistVideos, fetchPlaylistVideos, loading } = useYoutube();
 
-  const router = useRouter()
+  const router = useRouter();
 
-  useEffect(() => {
-    if (session && allVideos.length === 0) {
-      fetchAllVideos(session);
+  useEffect(() => { 
+    if (session && playlistId) {
+      fetchPlaylistVideos(session, playlistId);
     }
-  }, [session, fetchAllVideos, allVideos.length]);
+  }, [session, fetchPlaylistVideos, playlistVideos.length, playlistId]);
 
-  if (loading && allVideos.length == 0) {
+  if (loading && playlistVideos.length == 0) {
     return (
       <div
         className={`pl-3 pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${
@@ -33,32 +33,32 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
       </div>
     );
   }
-
+  
+  console.log(playlistVideos);
   return (
     <div
-    className={`pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${
-      isOpen ? "xl:grid-cols-3  w-4/5" : "xl:grid-cols-4  w-screen"
-    }  overflow-y-scroll custom-scrollbar pb-52`}
+      className={`pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${
+        isOpen ? "xl:grid-cols-3  w-4/5" : "xl:grid-cols-4  w-screen"
+      }  overflow-y-scroll custom-scrollbar pb-52`}
     >
-      {allVideos && allVideos.length > 0 ? (
-        allVideos.map((video) => (
+      {playlistVideos && playlistVideos.length > 0 ? (
+        playlistVideos.map((video) => (
           // <VideoCard key={video.id} video={video} />
-          <div key={video.videoId} className="p-3 cursor-pointer" onClick={ () =>{
-            console.log(video)
-            router.push(`/watch/${video.resourceId.videoId}`)
+          <div key={video.id} className="p-3 cursor-pointer" onClick={() => {
+            router.push(`/watch/${video.snippet.resourceId.videoId}`)
           }}>
             <Image
               className="rounded-lg"
               src={
-                video.thumbnail?.maxres?.url ||
-                video.thumbnail?.high?.url ||
+                video.snippet.thumbnails?.maxres?.url ||
+                video.snippet.thumbnails?.high?.url ||
                 "/images/image-not-found.png"
               }
               width={300}
               height={300}
               alt={"hello"}
             />
-            <h1 className="text-white">{video.title}</h1>
+            <h1 className="text-white">{video.snippet.title}</h1>
           </div>
         ))
       ) : (
@@ -70,4 +70,4 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
   );
 };
 
-export default HomePage;
+export default VideosPage;
