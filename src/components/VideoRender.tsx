@@ -20,7 +20,7 @@ const VideoRender = ({
     if (session && videoId  ) {
       fetchVideo(session, videoId);
     }
-  }, [session, videoId]);
+  }, [session, videoId, fetchVideo]);
 
   if (loading || !watchVideo) {
     return <VideoSkeleton isOpen={isOpen} />;
