@@ -72,6 +72,11 @@ const authOptions  = {
               }),
             });
 
+             await fetch(`${process.env.BACKEND_URL}/api/youtube/createPlaylists`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ session }),
+            });
           } catch (error) {
             console.error("Failed to send user profile to backend:", error);
           }
