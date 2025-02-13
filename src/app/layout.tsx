@@ -38,10 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="flex items-center justify-center w-full h-full">
           <head>
-          <meta
-                    name="google-site-verification"
-                    content="XAmKpd9mM-VgSmVHoKVlu7eBB8e9dXBHFDiB-gKr0B4"
-                />
+          <meta name="google-site-verification" content="H9UGoS5zgjOPLthjA-rjJZW8DcVFqQ5hZQkkX5r1D-s" />
           </head>
       <body
         className={`${robotSans.variable} ${youtube.variable} antialiased background-image h-4/5 w-4/5 bg-green-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-800 border-2`}
