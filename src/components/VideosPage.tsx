@@ -43,7 +43,7 @@ const VideosPage = ({ isOpen, playlistId }: { isOpen: boolean, playlistId : stri
       {playlistVideos && playlistVideos.length > 0 ? (
         playlistVideos.map((video) => (
           // <VideoCard key={video.id} video={video} />
-          <div key={video.id} className="p-3 cursor-pointer" onClick={() => {
+          <div key={`${video.id}-${video.snippet.playlistId}`} className="p-3 cursor-pointer" onClick={() => {
             router.push(`/watch/${video.snippet.resourceId.videoId}`)
           }}>
             <Image

@@ -43,7 +43,7 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
       {allVideos && allVideos.length > 0 ? (
         allVideos.map((video) => (
           // <VideoCard key={video.id} video={video} />
-          <div key={video.videoId} className="p-3 cursor-pointer" onClick={ () =>{
+          <div key={`${video.videoId}-${video.playlistId}-${Math.random() * 43}`} className="p-3 cursor-pointer" onClick={ () =>{
           
             router.push(`/watch/${video.videoId}`)
           }}>
