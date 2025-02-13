@@ -57,26 +57,25 @@ const authOptions  = {
         session.accessTokenExpiresAt = token.expires_at as number;
         session.error = token.error;
         
-        // Only call createUser when we have a user and it's a new session
-        // if (session.user?.email) {
-        //   try {
-        //     await fetch(`${process.env.BACKEND_URL}/api/user/createUser`, {
-        //       method: "POST",
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body: JSON.stringify({
-        //         name: session.user.name,
-        //         email: session.user.email,
-        //         image: session.user.image,
-        //         accessToken: session.accessToken,
-        //       }),
-        //     });
+        if (session.user?.email) {
+          try {
+            await fetch(`${process.env.BACKEND_URL}/api/user/createUser`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: session.user.name,
+                email: session.user.email,
+                image: session.user.image,
+                accessToken: session.accessToken,
+              }),
+            });
 
-        //   } catch (error) {
-        //     console.error("Failed to send user profile to backend:", error);
-        //   }
-        // }
+          } catch (error) {
+            console.error("Failed to send user profile to backend:", error);
+          }
+        }
 
         return session;
       },
