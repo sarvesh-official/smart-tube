@@ -28,6 +28,7 @@ export interface playlistVideos {
     id: string;
     snippet: {
       title: string;
+      playlistId : string;
       description: string;
       resourceId: {
         videoId: string;
@@ -61,6 +62,7 @@ export interface playlistVideos {
     userEmail: string;
     title: string;
     description: string;
+    playlistId : string;
     thumbnail: {
       default?: { url: string };
       medium?: { url: string };
