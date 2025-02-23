@@ -41,7 +41,7 @@ export default function RootLayout({
           <meta name="google-site-verification" content="H9UGoS5zgjOPLthjA-rjJZW8DcVFqQ5hZQkkX5r1D-s" />
           </head>
       <body
-        className={`${robotSans.variable} ${youtube.variable} antialiased background-image h-4/5 w-4/5 bg-green-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-800 border-2`}
+        className={`${robotSans.variable} ${youtube.variable} antialiased background-image h-4/5 w-4/5 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20`}
       >
         <YoutubeProvider>
           <Provider>

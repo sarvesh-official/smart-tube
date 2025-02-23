@@ -59,7 +59,7 @@ const authOptions  = {
         
         if (session.user?.email) {
           try {
-            await fetch(`${process.env.BACKEND_URL}/api/user/createUser`, {
+            await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/createUser`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const authOptions  = {
               }),
             });
 
-             await fetch(`${process.env.BACKEND_URL}/api/youtube/createPlaylists`, {
+             await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/youtube/createPlaylists`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ session }),
