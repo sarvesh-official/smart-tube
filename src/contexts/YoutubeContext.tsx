@@ -15,6 +15,13 @@ interface YoutubeContextType {
   fetchPlaylistVideos: (session: Session | null, playlistId?: string) => Promise<void>;
   fetchVideo: (session: Session | null, videoId?: string) => Promise<void>;
   fetchAllVideos: (session: Session | null) => Promise<void>;
+  searchResults: AllVideo[];
+  setSearchResults: (results: AllVideo[]) => void;
+  searchVideos: (session: Session | null, query: string) => Promise<void>;
+  isSearchActive: boolean;
+  setSearchActive: (active: boolean) => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 }
 
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
@@ -26,8 +33,14 @@ export function YoutubeProvider({ children }: { children: ReactNode }) {
   const [playlistVideos, setPlaylistVideos] = useState<PlaylistVideo[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [allVideos, setAllVideos] = useState<AllVideo[]>([]); // ✅ Corrected Type
-  const [watchVideo, setWatchVideo] = useState<WatchVideo | null>(null); // ✅ Corrected Type
+  const [allVideos, setAllVideos] = useState<AllVideo[]>([]); 
+  const [watchVideo, setWatchVideo] = useState<WatchVideo | null>(null); 
+  const [searchResults, setSearchResults] = useState<AllVideo[]>([]); 
+  const [isSearchActive, setIsSearchActive] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
+  const setSearchActive = (active: boolean) => {
+    setIsSearchActive(active);
+  };
 
   const fetchPlaylists = useCallback(async (session: Session | null) => {
     if (!session?.accessToken) return;
@@ -122,11 +135,38 @@ export function YoutubeProvider({ children }: { children: ReactNode }) {
       }
 
       const data = await response.json();
-      setWatchVideo(data.data || null); // ✅ Ensures it's a single object
+      setWatchVideo(data.data || null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
       console.error("Error fetching video:", err);
-      setWatchVideo(null); // ✅ Reset on error
+      setWatchVideo(null); 
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const searchVideos = useCallback(async (session: Session | null, query: string) => {
+
+    if (!session?.accessToken) return;
+    setLoading(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/youtube/search`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, session }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to search videos");
+      }
+
+      const data = await response.json();
+      setSearchResults(Array.isArray(data.data) ? data.data : []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+      console.error("Error searching videos:", err);
+      setSearchResults([]);
     } finally {
       setLoading(false);
     }
@@ -145,6 +185,13 @@ export function YoutubeProvider({ children }: { children: ReactNode }) {
         error,
         fetchPlaylists,
         fetchPlaylistVideos,
+        searchResults,
+        searchVideos,
+        isSearchActive,
+        setSearchActive,
+        isOpen,
+        setSearchResults,
+        setIsOpen,
       }}
     >
       {children}

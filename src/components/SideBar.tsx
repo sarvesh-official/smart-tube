@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { CgPlayList } from "react-icons/cg";
 
-const SideBar = ({ isOpen }: { isOpen: boolean }) => {
+const SideBar = () => {
   const { data: session } = useSession();
 
-  const { playlists, fetchPlaylists } = useYoutube();
+  const { playlists, fetchPlaylists, isOpen } = useYoutube();
   useEffect(() => {
     fetchPlaylists(session);
   }, [fetchPlaylists,session]);

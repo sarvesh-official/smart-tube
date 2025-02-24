@@ -8,14 +8,12 @@ import VideoSkeleton from "./VideoSkeleton";
 import PlaylistContents from "./PlaylistContents";
 
 const VideoRender = ({
-  isOpen,
   videoId
 }: {
-  isOpen: boolean;
   videoId: string;
 }) => {
   const { data: session } = useSession();
-  const { watchVideo, fetchVideo, loading } = useYoutube();
+  const { watchVideo, fetchVideo, loading, isOpen } = useYoutube();
 
   useEffect(() => {
     if (session && videoId) {
@@ -31,11 +29,11 @@ const VideoRender = ({
     <div
       className={`overflow-y-scroll custom-scrollbar ${
         isOpen ? "w-4/5" : "w-screen"
-      } pt-6 p-4`}
+      } pt-6  p-4`}
     >
       <div>
         {watchVideo ? (
-          <div className="text-white w-full flex gap-6">
+          <div className={`text-white w-full flex  ${isOpen ?  "gap-2" : "gap-6"}`}>
             <div className="rounded-xl w-3/5">
               <iframe
                 className={`rounded-xl ${

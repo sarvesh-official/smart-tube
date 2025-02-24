@@ -23,7 +23,7 @@ const SignIn = () => {
             <h1 className="text-2xl font-bold mb-4">Login with Google</h1>
             <button  
               onClick={() => signIn("google")} 
-              className="w-full bg-violet-500 text-white py-2 px-4 rounded hover:bg-violet-300 transition duration-200"
+              className="w-full bg-violet-400 text-white py-2 px-4 rounded hover:bg-violet-300 transition duration-200"
             >
               Sign In
             </button>
