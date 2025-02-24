@@ -40,6 +40,12 @@ export const SearchBar = () => {
           className="mr-2 cursor-pointer hover:scale-110 text-white"
           />
         )}
+        {/* {searchResults.length > 0 && (
+          <FaTrash
+            onClick={handleClear}
+            className="mr-2 cursor-pointer hover:scale-110 text-white"
+          />
+        )} */}
         </div>
         <button onClick={handleSubmit} className="bg-violet-600 backdrop-blur-md bg-opacity-20 rounded-r-full py-1 px-2 flex items-center justify-center cursor-pointer hover:scale-105">
           <FaSearch color="white" size={20} />
