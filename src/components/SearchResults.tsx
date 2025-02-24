@@ -5,12 +5,11 @@ import { useRouter } from "next/navigation";
 import Skeleton from "./Skeleton";
 
 const SearchResults = () => {
-  const { searchResults, isOpen, loading } = useYoutube();
+  const { searchResults, isOpen, loading, setSearchResults } = useYoutube();
   const router = useRouter();
 
 
 
-  console.log(searchResults);
 
   if (loading && searchResults.length == 0) {
     return (
@@ -35,7 +34,7 @@ const SearchResults = () => {
           {searchResults && searchResults.length > 0 ? (
             searchResults.map((video) => (
               <div key={`${video.videoId}-${video.playlistId}-${Math.random() * 43}`} className="p-3 cursor-pointer" onClick={ () =>{
-              
+                setSearchResults([])
                 router.push(`/watch/${video.videoId}`)
               }}>
                 <Image
