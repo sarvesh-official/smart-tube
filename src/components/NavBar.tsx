@@ -5,9 +5,11 @@ import { FaYoutube } from "react-icons/fa"
 import { SearchBar } from "./SearchBar"
 import ProfileDropDown from "./ProfileDropDown"
 import Notification from "./Notification"
+import { useYoutube } from "@/contexts/YoutubeContext"
 
-const NavBar = ({isOpen,setIsOpen} : {isOpen : boolean, setIsOpen : (isOpen : boolean) => void}) => {
+const NavBar = () => {
 
+  const {isOpen, setIsOpen} = useYoutube()
 
   return (
     <nav className="flex justify-between p-3 bg-white rounded-xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-b-none">

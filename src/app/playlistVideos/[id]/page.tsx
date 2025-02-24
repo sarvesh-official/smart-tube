@@ -1,21 +1,25 @@
 "use client"
 import NavBar from "@/components/NavBar"
+import SearchResults from "@/components/SearchResults";
 import SideBar from "@/components/SideBar"
 import VideosPage from "@/components/VideosPage";
+import { useYoutube } from "@/contexts/YoutubeContext";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 
 const PlaylistVideos = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
     const {id} : {id : string} = useParams();
+    const { searchResults } = useYoutube();
   return (
     <div className="flex flex-col h-full w-full">
-      <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <NavBar/>
 
       <div className="flex overflow-hidden justify-evenly">
-        <SideBar isOpen={isOpen} />
-        <VideosPage isOpen={isOpen} playlistId={id}/>
+        <SideBar/>
+        {
+          searchResults.length > 0 ? <SearchResults /> :  <VideosPage playlistId={id}/>
+        }
+       
       </div>
     </div>
   )

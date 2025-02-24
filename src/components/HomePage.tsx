@@ -7,9 +7,9 @@ import Skeleton from "./Skeleton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const HomePage = ({ isOpen }: { isOpen: boolean }) => {
+const HomePage = () => {
   const { data: session } = useSession();
-  const { allVideos, fetchAllVideos, loading } = useYoutube();
+  const { allVideos, fetchAllVideos, loading, isOpen } = useYoutube();
 
   const router = useRouter()
 
@@ -23,7 +23,7 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
     return (
       <div
         className={`pl-3 pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${
-          isOpen ? "xl:grid-cols-3  w-4/5" : "xl:grid-cols-4  w-screen"
+          isOpen ? "xl:grid-cols-3  w-4/5" : "xl:grid-cols-4 w-screen"
         }  overflow-y-scroll custom-scrollbar pb-52`}
       >
         {" "}
@@ -36,13 +36,12 @@ const HomePage = ({ isOpen }: { isOpen: boolean }) => {
 
   return (
     <div
-    className={`pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-1 ${
+    className={`pt-4 grid grid-cols-1 h-screen md:grid-cols-1 lg:grid-cols-2 gap-1 ${
       isOpen ? "xl:grid-cols-3  w-4/5" : "xl:grid-cols-4  w-screen"
     }  overflow-y-scroll custom-scrollbar pb-52`}
     >
       {allVideos && allVideos.length > 0 ? (
         allVideos.map((video) => (
-          // <VideoCard key={video.id} video={video} />
           <div key={`${video.videoId}-${video.playlistId}-${Math.random() * 43}`} className="p-3 cursor-pointer" onClick={ () =>{
           
             router.push(`/watch/${video.videoId}`)

@@ -7,9 +7,9 @@ import Skeleton from "./Skeleton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const VideosPage = ({ isOpen, playlistId }: { isOpen: boolean, playlistId : string }) => {
+const VideosPage = ({ playlistId }: { playlistId : string }) => {
   const { data: session } = useSession();
-  const { playlistVideos, fetchPlaylistVideos, loading } = useYoutube();
+  const { playlistVideos, fetchPlaylistVideos, loading, isOpen } = useYoutube(); // ✅ Add isOpen from context
 
   const router = useRouter();
 
